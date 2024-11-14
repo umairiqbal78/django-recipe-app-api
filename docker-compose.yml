@@ -1,0 +1,13 @@
+x-compose-version: "3.9"
+services:
+  app: # service name
+    build: # build the image inside root directory
+      context: . # current directory (root)
+      args:
+        - DEV=true
+    ports: # port mapping
+      - "8000:8000"
+    volumes: # way of mapping directories between system and docker container
+      - ./app:/app # mapping app directory to /app directory inside container to reflect changes in real time
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
