@@ -5,6 +5,7 @@ Simple Test for Calc Function
 from django.test import SimpleTestCase
 from app import calc
 
+
 class CalcTests(SimpleTestCase):
     """Test for Calc Functions"""
     def test_add_numbers(self):
