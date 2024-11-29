@@ -10,7 +10,9 @@ services:
     volumes: # way of mapping directories between system and docker container
       - ./app:/app # mapping app directory to /app directory inside container to reflect changes in real time
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
     environment: # environment variables
       - DB_HOST=db
       - DB_NAME=devdb
