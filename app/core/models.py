@@ -21,6 +21,15 @@ class UserManager(BaseUserManager):
 
         return user
 
+    def create_superuser(self, email, password):
+        """Create and save a new superuser with given details"""
+        user = self.create_user(email, password)
+        user.is_superuser = True
+        user.is_staff = True
+        user.save(using=self._db) # using=self._db is used to support multiple databases
+
+        return user
+
 class User(AbstractBaseUser, PermissionsMixin):
     # AbstractBaseUser: Base class for authenticating users. To use this class, you must set the USERNAME_FIELD attribute.
     # PermissionsMixin: A mixin class that adds the fields and methods necessary to support Django's Group and Permission model using the ModelBackend.
